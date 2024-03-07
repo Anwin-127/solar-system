@@ -1,30 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <link href='https://fonts.googleapis.com/css?family=Roboto Mono' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        body{
+        body {
             font-family: 'Roboto Mono';
             font-size: 60px;
             margin: 0;
         }
-        p{
+
+        p {
             color: rgb(186, 186, 118);
         }
     </style>
 </head>
+
 <body>
 
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/renderers/CSS2DRenderer.js"></script>
-    
+
     <script>
         const renderer = new THREE.WebGLRenderer();
+
         renderer.setSize(window.innerWidth, window.innerHeight);
+
         document.body.appendChild(renderer.domElement);
 
         const scene = new THREE.Scene();
@@ -36,7 +41,7 @@
             1000
         );
 
-        const orbit = new THREE.OrbitControls(camera, renderer.domElement); // Corrected here
+        const orbit = new THREE.OrbitControls(camera, renderer.domElement);
 
         camera.position.set(-90, 140, 140);
         orbit.update();
@@ -44,7 +49,17 @@
         const ambientLight = new THREE.AmbientLight(0x333333);
         scene.add(ambientLight);
 
-        const labelRenderer = new THREE.CSS2DRenderer(); // Corrected here
+        const cubeTextureLoader = new THREE.CubeTextureLoader();
+        scene.background = cubeTextureLoader.load([
+            '../public/stars.jpg',
+            '../public/stars.jpg',
+            '../public/stars.jpg',
+            '../public/stars.jpg',
+            '../public/stars.jpg',
+            '../public/stars.jpg'
+        ]);
+
+        const labelRenderer = new THREE.CSS2DRenderer();
         labelRenderer.setSize(window.innerWidth, window.innerHeight);
         labelRenderer.domElement.style.position = 'absolute';
         labelRenderer.domElement.style.top = '0px';
@@ -57,13 +72,15 @@
         div.appendChild(solarT);
         const divContainer = new THREE.CSS2DObject(div);
         scene.add(divContainer);
-        divContainer.position.set(0,50,0)
+        divContainer.position.set(0, 50, 0)
+
+
 
         const textureLoader = new THREE.TextureLoader();
 
         const sunGeo = new THREE.SphereGeometry(16, 30, 30);
         const sunMat = new THREE.MeshBasicMaterial({
-            map: textureLoader.load('./public//sun.jpg')
+            map: textureLoader.load('../public/sun.jpg')
         });
         const sun = new THREE.Mesh(sunGeo, sunMat);
         scene.add(sun);
@@ -76,8 +93,8 @@
             const mesh = new THREE.Mesh(geo, mat);
             const obj = new THREE.Object3D();
             obj.add(mesh);
-            
-            if(ring) {
+
+            if (ring) {
                 const ringGeo = new THREE.RingGeometry(
                     ring.innerRadius,
                     ring.outerRadius,
@@ -93,28 +110,29 @@
             }
             scene.add(obj);
             mesh.position.x = position;
-            return {mesh, obj}
+            return { mesh, obj }
         }
 
-        const mercury = createPlanete(3.2, './public//mercury.jpg', 28);
-        const venus = createPlanete(5.8, './public//venus.jpg', 44);
-        const earth = createPlanete(6, './public//earth.jpg', 62);
-        const mars = createPlanete(4, './public//mars.jpg', 78);
-        const jupiter = createPlanete(12, './public//jupiter.jpg', 100);
-        const saturn = createPlanete(10, './public//saturn.jpg', 138, {
+        const mercury = createPlanete(3.2, '../public/mercury.jpg', 28);
+        const venus = createPlanete(5.8, '../public/venus.jpg', 44);
+        const earth = createPlanete(6, '../public/earth.jpg', 62);
+        const mars = createPlanete(4, '../public/mars.jpg', 78);
+        const jupiter = createPlanete(12, '../public/jupiter.jpg', 100);
+        const saturn = createPlanete(10, '../public/saturn.jpg', 138, {
             innerRadius: 10,
             outerRadius: 20,
-            texture: './public//saturn_ring.png'
+            texture: '../public/saturn ring.png'
         });
-        const uranus = createPlanete(7, './public//uranus.jpg', 176, {
+        const uranus = createPlanete(7, '../public/uranus.jpg', 176, {
             innerRadius: 7,
             outerRadius: 12,
-            texture: './public//uranus_ring.png'
+            texture: '../public/uranus ring.png'
         });
-        const neptune = createPlanete(7, './public//neptune.jpg', 200);
+        const neptune = createPlanete(7, '../public/neptune.jpg', 200);
 
         const pointLight = new THREE.PointLight(0xFFFFFF, 2, 300);
         scene.add(pointLight);
+
 
         function animate() {
 
@@ -143,4 +161,5 @@
         renderer.setAnimationLoop(animate);
     </script>
 </body>
+
 </html>
