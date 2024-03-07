@@ -63,7 +63,7 @@
 
         const sunGeo = new THREE.SphereGeometry(16, 30, 30);
         const sunMat = new THREE.MeshBasicMaterial({
-            map: textureLoader.load('https://example.com/sun.jpg')
+            map: textureLoader.load('./public//sun.jpg')
         });
         const sun = new THREE.Mesh(sunGeo, sunMat);
         scene.add(sun);
@@ -96,22 +96,22 @@
             return {mesh, obj}
         }
 
-        const mercury = createPlanete(3.2, 'https://example.com/mercury.jpg', 28);
-        const venus = createPlanete(5.8, 'https://example.com/venus.jpg', 44);
-        const earth = createPlanete(6, 'https://example.com/earth.jpg', 62);
-        const mars = createPlanete(4, 'https://example.com/mars.jpg', 78);
-        const jupiter = createPlanete(12, 'https://example.com/jupiter.jpg', 100);
-        const saturn = createPlanete(10, 'https://example.com/saturn.jpg', 138, {
+        const mercury = createPlanete(3.2, './public//mercury.jpg', 28);
+        const venus = createPlanete(5.8, './public//venus.jpg', 44);
+        const earth = createPlanete(6, './public//earth.jpg', 62);
+        const mars = createPlanete(4, './public//mars.jpg', 78);
+        const jupiter = createPlanete(12, './public//jupiter.jpg', 100);
+        const saturn = createPlanete(10, './public//saturn.jpg', 138, {
             innerRadius: 10,
             outerRadius: 20,
-            texture: 'https://example.com/saturn_ring.png'
+            texture: './public//saturn_ring.png'
         });
-        const uranus = createPlanete(7, 'https://example.com/uranus.jpg', 176, {
+        const uranus = createPlanete(7, './public//uranus.jpg', 176, {
             innerRadius: 7,
             outerRadius: 12,
-            texture: 'https://example.com/uranus_ring.png'
+            texture: './public//uranus_ring.png'
         });
-        const neptune = createPlanete(7, 'https://example.com/neptune.jpg', 200);
+        const neptune = createPlanete(7, './public//neptune.jpg', 200);
 
         const pointLight = new THREE.PointLight(0xFFFFFF, 2, 300);
         scene.add(pointLight);
