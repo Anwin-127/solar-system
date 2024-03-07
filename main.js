@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
+import {CSS2DRenderer,CSS2DObject} from 'three/examples/jsm/renderers/CSS2DRenderer';
 
 import starsTexture from './public/stars.jpg';
 import sunTexture from './public/sun.jpg';
@@ -47,6 +48,23 @@ scene.background = cubeTextureLoader.load([
     starsTexture
 ]);
 
+const labelRenderer = new CSS2DRenderer();
+labelRenderer.setSize(window.innerWidth, window.innerHeight);
+labelRenderer.domElement.style.position = 'absolute';
+labelRenderer.domElement.style.top = '0px';
+labelRenderer.domElement.style.pointerEvents = 'none';
+document.body.appendChild(labelRenderer.domElement);
+
+const solarT = document.createElement('p');
+solarT.textContent = 'SOLAR SYSTEM';
+const div = document.createElement('div');
+div.appendChild(solarT);
+const divContainer = new CSS2DObject(div);
+scene.add(divContainer);
+divContainer.position.set(0,50,0)
+
+
+
 const textureLoader = new THREE.TextureLoader();
 
 const sunGeo = new THREE.SphereGeometry(16, 30, 30);
@@ -64,6 +82,7 @@ function createPlanete(size, texture, position, ring) {
     const mesh = new THREE.Mesh(geo, mat);
     const obj = new THREE.Object3D();
     obj.add(mesh);
+    
     if(ring) {
         const ringGeo = new THREE.RingGeometry(
             ring.innerRadius,
@@ -103,7 +122,9 @@ const neptune = createPlanete(7, neptuneTexture, 200);
 const pointLight = new THREE.PointLight(0xFFFFFF, 2, 300);
 scene.add(pointLight);
 
+
 function animate() {
+
     sun.rotateY(0.004);
     mercury.mesh.rotateY(0.004);
     venus.mesh.rotateY(0.002);
@@ -122,7 +143,7 @@ function animate() {
     saturn.obj.rotateY(0.0009);
     uranus.obj.rotateY(0.0004);
     neptune.obj.rotateY(0.0001);
-
+    labelRenderer.render(scene, camera);
     renderer.render(scene, camera);
 }
 
