@@ -1,6 +1,6 @@
 import * as THREE from './three.module.js';
-import {OrbitControls} from './three/examples/jsm/controls/OrbitControls.js';
-import {CSS2DRenderer,CSS2DObject} from './three/examples/jsm/renderers/CSS2DRenderer';
+import {OrbitControls} from './OrbitControls.js';
+import {CSS2DRenderer,CSS2DObject} from './CSS2DRenderer.js';
 
 import starsTexture from './public/stars.jpg';
 import sunTexture from './public/sun.jpg';
