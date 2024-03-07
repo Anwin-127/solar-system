@@ -2,18 +2,7 @@ import * as THREE from './three.module.js';
 import {OrbitControls} from './OrbitControls.js';
 import {CSS2DRenderer,CSS2DObject} from './CSS2DRenderer.js';
 
-import starsTexture from './public/stars.jpg';
-import sunTexture from './public/sun.jpg';
-import mercuryTexture from './public/mercury.jpg';
-import venusTexture from './public/venus.jpg';
-import earthTexture from './public/earth.jpg';
-import marsTexture from './public/mars.jpg';
-import jupiterTexture from './public/jupiter.jpg';
-import saturnTexture from './public/saturn.jpg';
-import saturnRingTexture from './public/saturn ring.png';
-import uranusTexture from './public/uranus.jpg';
-import uranusRingTexture from './public/uranus ring.png';
-import neptuneTexture from './public/neptune.jpg';
+
 
 const renderer = new THREE.WebGLRenderer();
 
@@ -40,12 +29,12 @@ scene.add(ambientLight);
 
 const cubeTextureLoader = new THREE.CubeTextureLoader();
 scene.background = cubeTextureLoader.load([
-    starsTexture,
-    starsTexture,
-    starsTexture,
-    starsTexture,
-    starsTexture,
-    starsTexture
+    './public/stars.jpg',
+    './public/stars.jpg',
+    './public/stars.jpg',
+    './public/stars.jpg',
+    './public/stars.jpg',
+    './public/stars.jpg'
 ]);
 
 const labelRenderer = new CSS2DRenderer();
@@ -69,7 +58,7 @@ const textureLoader = new THREE.TextureLoader();
 
 const sunGeo = new THREE.SphereGeometry(16, 30, 30);
 const sunMat = new THREE.MeshBasicMaterial({
-    map: textureLoader.load(sunTexture)
+    map: textureLoader.load('./public/sun.jpg')
 });
 const sun = new THREE.Mesh(sunGeo, sunMat);
 scene.add(sun);
@@ -102,22 +91,22 @@ function createPlanete(size, texture, position, ring) {
     return {mesh, obj}
 }
 
-const mercury = createPlanete(3.2, mercuryTexture, 28);
-const venus = createPlanete(5.8, venusTexture, 44);
-const earth = createPlanete(6, earthTexture, 62);
-const mars = createPlanete(4, marsTexture, 78);
-const jupiter = createPlanete(12, jupiterTexture, 100);
-const saturn = createPlanete(10, saturnTexture, 138, {
+const mercury = createPlanete(3.2, './public/mercury.jpg', 28);
+const venus = createPlanete(5.8, './public/venus.jpg', 44);
+const earth = createPlanete(6, './public/earth.jpg', 62);
+const mars = createPlanete(4, './public/mars.jpg', 78);
+const jupiter = createPlanete(12, './public/jupiter.jpg', 100);
+const saturn = createPlanete(10, './public/saturn.jpg', 138, {
     innerRadius: 10,
     outerRadius: 20,
-    texture: saturnRingTexture
+    texture: './public/saturn ring.png'
 });
-const uranus = createPlanete(7, uranusTexture, 176, {
+const uranus = createPlanete(7,  './public/uranus.jpg', 176, {
     innerRadius: 7,
     outerRadius: 12,
-    texture: uranusRingTexture
+    texture: './public/uranus ring.png'
 });
-const neptune = createPlanete(7, neptuneTexture, 200);
+const neptune = createPlanete(7, './public/neptune.jpg', 200);
 
 const pointLight = new THREE.PointLight(0xFFFFFF, 2, 300);
 scene.add(pointLight);
