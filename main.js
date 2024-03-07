@@ -1,8 +1,3 @@
-import * as THREE from './three.module.js';
-import {OrbitControls} from './OrbitControls.js';
-import {CSS2DRenderer,CSS2DObject} from './CSS2DRenderer.js';
-
-
 
 const renderer = new THREE.WebGLRenderer();
 
